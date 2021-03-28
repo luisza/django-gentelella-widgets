@@ -27,7 +27,7 @@ README = open(os.path.join(os.path.dirname(__file__), 'Readme.rst')).read()
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 
-version = '0.0.1'
+version = '0.0.1a'
 
 setup(
     author='Luis Zarate Montero',
@@ -45,6 +45,8 @@ setup(
         'django-chunked-upload>=2.0.0',
         'djangoajax>=3.2',
         'django-markitup>=4.0.0',
+        'djangorestframework==3.11.2',
+        'django-markitup==4.0.0',
         'markdown',
         'Pillow'
     ],
