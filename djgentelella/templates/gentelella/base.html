@@ -29,7 +29,6 @@
         <link href="{% static 'vendors/iCheck/green.css' %}" rel="stylesheet">
         <link href="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet">
         <link href="{% static 'vendors/nprogress/nprogress.min.css' %}" rel="stylesheet">
-        <link href="{% static 'vendors/tail.select/tail.select-default.min.css' %}" rel="stylesheet">
         <link href="{% static 'vendors/flag-icon-css/flag-icon.min.css' %}" rel="stylesheet">
         {% get_define 'use_chartjs' as use_chartjs %}
         {% if use_chartjs %}
@@ -127,8 +126,7 @@
 
         <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.min.js' %}"></script>
         <script src="{% static 'vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js' %}"></script>
-        <!-- bootstrap-wysiwyg -->
-        <script src="{% static 'vendors/bootstrap-wysiwyg/bootstrap-wysiwyg.min.js' %}"></script>
+
         <!-- Switchery -->
         <script src="{% static 'vendors/switchery/switchery.min.js' %}"></script>
         <!-- Select2 -->
@@ -138,8 +136,6 @@
         <!-- Autosize -->
         <script src="{% static 'vendors/autosize/autosize.min.js' %}"></script>
         <script src="{% static 'vendors/bootstrap-maxlength/bootstrap-maxlength.min.js' %}"></script>
-        <script src="{% static 'vendors/tail.select/tail.select-full.min.js' %}"></script>
-
         <script src="{% static 'vendors/fileupload/jquery.ui.widget.min.js' %}"></script>
         <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
         <script src="{% static 'vendors/fileupload/jquery.iframe-transport.min.js' %}"></script>
@@ -161,7 +157,8 @@
       <script src="{% static 'gentelella/js/fileupload.widget.js' %}"></script>
       <script src="{% static 'gentelella/js/custom.widgets.js' %}"></script>
       <script src="{% static 'gentelella/js/custom.js' %}"></script>
-
+      <script src="{% static 'gentelella/js/select2related.js' %}"></script>
+      <script src="{% static 'gentelella/js/autocompleteSelect2.js' %}"></script>
 
           {% render_menu_js_widget %}
       {% endblock %}

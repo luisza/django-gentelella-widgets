@@ -402,4 +402,14 @@ class DateRangeInput(DJDateInput):
 
     def __init__(self, attrs=None, format=None):
         attrs = update_kwargs(attrs, self.__class__.__name__)
+        attrs['autocomplete'] = 'off'
+        super().__init__(attrs, format=format)
+
+class DateRangeInputCustom(DJDateInput):
+    format_key = 'DATE_INPUT_FORMATS'
+    template_name = 'gentelella/widgets/daterange.html'
+
+    def __init__(self, attrs=None, format=None):
+        attrs = update_kwargs(attrs, self.__class__.__name__)
+        attrs['autocomplete'] = 'off'
         super().__init__(attrs, format=format)

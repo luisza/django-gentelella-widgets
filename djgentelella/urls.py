@@ -1,10 +1,21 @@
 from chunked_upload.views import ChunkedUploadView, ChunkedUploadCompleteView
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from .groute import routes
 
 from djgentelella.notification.base import NotificacionAPIView, NotificationList
 from djgentelella.widgets.helper import HelperWidgetView
+
+def import_module_app_gt(app, name):
+    try:
+        __import__(app + '.' + name)
+    except ModuleNotFoundError as e:
+        pass
+
+for app in settings.INSTALLED_APPS:
+    import_module_app_gt(app, 'gtselects')
 
 auth_urls = [
     path('accounts/login/',
@@ -45,7 +56,8 @@ base_urlpatterns = [
         name='help'),
     url('^notification/(?P<pk>\d+)?$', NotificacionAPIView.as_view({'get': 'list', 'put': 'update', 'delete': 'destroy'}),
         name="notifications"),
-    url('^notification/list/$', NotificationList.as_view(), name="notification_list")
+    url('^notification/list/$', NotificationList.as_view(), name="notification_list"),
+    url('gtapis/', include(routes.urls)),
 ]
 
 urlpatterns = auth_urls + base_urlpatterns
