@@ -69,16 +69,18 @@ class BaseSelect2View(generics.ListAPIView, viewsets.GenericViewSet):
     ref_name = 'relfield'
     text_separator = ' '
     text_wrapper = ''
+    text_split = ','
     order_by = 'pk'
+
 
     def filter_data(self, queryset, qe):
         filters = None
         for field in self.fields:
             for q in qe:
                 if filters is None:
-                    filters = Q(**{field + '__icontains': q})
+                    filters = Q(**{field + '__icontains': q.strip()})
                 else:
-                    filters |= Q(**{field + '__icontains': q})
+                    filters |= Q(**{field + '__icontains': q.strip()})
         return queryset.filter(filters)
 
     def query_get(self, name, default, aslist=False):
@@ -87,7 +89,7 @@ class BaseSelect2View(generics.ListAPIView, viewsets.GenericViewSet):
         else:
             q = self.request.GET.get(name, default)
             if isinstance(q, str):
-                q = q.split(',')
+                q = q.split(self.text_split)
             if q == ['']:
                 q = []
         return q
@@ -105,6 +107,8 @@ class BaseSelect2View(generics.ListAPIView, viewsets.GenericViewSet):
 
         if q and self.fields:
             queryset = self.filter_data(queryset, q)
+        if self.order_by:
+            queryset = queryset.order_by(self.order_by)
         return queryset
 
     def get_queryset(self):
@@ -113,7 +117,7 @@ class BaseSelect2View(generics.ListAPIView, viewsets.GenericViewSet):
                 "or override the `get_queryset()` method."
                 % self.__class__.__name__
         )
-        return self.model.objects.all().order_by(self.order_by)
+        return self.model.objects.all()
 
     # def get_serializer(self, *args, **kwargs):
     #     return super().get_serializer(self, *args, **kwargs)

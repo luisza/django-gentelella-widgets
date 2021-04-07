@@ -5,7 +5,7 @@ from django.utils.translation import get_language
 from djgentelella.utils import get_settings as get_settings_utils
 from djgentelella import settings
 import uuid
-
+import sys
 
 register = template.Library()
 
@@ -20,6 +20,9 @@ def get_settings(context,  name, **kwargs):
 def get_random_uuid():
     return str(uuid.uuid4())
 
+@register.simple_tag
+def get_version():
+    return sys.modules['djgentelella'].__version__
 
 @register.simple_tag(takes_context=True)
 def get_datatables_translation(context):
