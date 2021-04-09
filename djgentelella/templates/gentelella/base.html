@@ -147,6 +147,7 @@
         {% if use_datatables %}
         <script src="{% static 'vendors/datatables/jquery.dataTables.min.js' %}?v={% get_version %}"></script>
         <script src="{% static 'vendors/datatables/dataTables.bootstrap.min.js' %}?v={% get_version %}"></script>
+        <script src="{% static 'gentelella/js/datatables.js' %}?v={% get_version %}"></script>
         {% endif %}
 
         {% get_define 'use_chartjs' as use_chartjs %}

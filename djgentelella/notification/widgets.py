@@ -2,6 +2,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import  translation
 from django.templatetags import static
+import sys
 
 class NotificationMenu:
     """
@@ -45,7 +46,7 @@ class NotificationMenu:
         return render_to_string('gentelella/menu/notificacion.html', context=self.context)
 
     def render_js(self):
-        data = {'js_script': static.static('gentelella/js/notifications.js')}
+        data = {'js_script': static.static('gentelella/js/notifications.js')+"?v="+sys.modules['djgentelella'].__version__ }
         return """
          <script src="%(js_script)s"> </script>
         """%data

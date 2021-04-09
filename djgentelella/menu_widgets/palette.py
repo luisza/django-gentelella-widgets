@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from django.templatetags import static
 
 from djgentelella.forms.models import HelpForm
-
+import sys
 
 class PalleteWidget:
     def __init__(self, context):
@@ -46,8 +46,8 @@ class PalleteWidget:
         """%{'data':json.dumps(data),
              'id': self.context['id'],
              'item_pk': self.context['item'].pk,
-             'interact': static.static('vendors/interact/interact.min.js'),
-             'js_script': static.static('gentelella/js/helper_widget.js')
+             'interact': static.static('vendors/interact/interact.min.js')+"?v="+sys.modules['djgentelella'].__version__,
+             'js_script': static.static('gentelella/js/helper_widget.js')+"?v="+sys.modules['imd'].__version__
              }
 
     def render_external_html(self):
